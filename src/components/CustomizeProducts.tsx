@@ -19,6 +19,9 @@ export default function CustomizeProducts({
   const [selectedVariant, setSelectedVariant] =
     React.useState<products.Variant | null>();
 
+  console.log(productOptions);
+  
+
   useEffect(() => {
     const variant = variants.find((variant) => {
       const varinatChoices = variant.choices;
@@ -56,7 +59,7 @@ export default function CustomizeProducts({
           <div className=" flex flex-col gap-4" key={option.name}>
             <h4 className=" font-medium">选择{option.name}</h4>
             <ul className="flex items-center gap-3">
-              {option.choices?.map((choice) => {
+              {option.choices?.map((choice,index) => {
                 const disabled = !isVarinatInStock({
                   ...selectedOptions,
                   [option.name!]: choice.description!,
@@ -67,6 +70,7 @@ export default function CustomizeProducts({
 
                 return option.name === "色彩" ? (
                   <li
+                    key={index}
                     className=" w-8 h-8 rounded-full ring-1 ring-gray-200 relative"
                     style={{
                       backgroundColor: choice.value,
@@ -90,6 +94,7 @@ export default function CustomizeProducts({
                   </li>
                 ) : (
                   <li
+                    key={index}
                     className=" ring-1 ring-red-400 text-red-400 rounded-md py-1 px-4 text-sm"
                     style={{
                       cursor: disabled ? "not-allowed" : "pointer",

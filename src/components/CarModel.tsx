@@ -11,6 +11,9 @@ export default function CarModel() {
 
   const { cart, isLoading, removeItem } = useCartStore();
 
+  // @ts-ignore
+  const total = cart?.subtotal.amount;
+
   return (
     <div className=" w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgba(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-20">
       {!cart.lineItems ? (
@@ -80,7 +83,7 @@ export default function CarModel() {
           <div>
             <div className="flex items-center justify-between font-semibold">
               <span>总计</span>
-              <span>${cart.subtotal.amount}</span>
+              <span>${total || 0}</span>
             </div>
             <p className="text-gray-500 text-sm mt-2 mb-4">
               在结账时计算运费和税金。
